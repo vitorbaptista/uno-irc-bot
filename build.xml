@@ -77,7 +77,7 @@
 
     <target name="doc" depends="clean">
         <javadoc 
-            packagenames="baralho.*"
+            packagenames="jogodecartas.*"
             destdir="doc"
             author="true"
             version="true"

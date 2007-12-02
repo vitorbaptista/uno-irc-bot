@@ -12,14 +12,24 @@
  * =================================================== */
 
 
-package unobot;
+package jogodecartas;
 
-import org.jibble.pircbot.*;
+import java.util.Vector;
 
 
-public class UnoBot extends PircBot {
-    public UnoBot() {
-        this.setName("UnoBot");
-        this.setAutoNickChange(true);
-    }
+/* TODO: Pensar em como esta classe deve funcionar. Pensei em criá-la para podermos implementar realmente
+ * as regras do jogo em uma subclasse, assim poderíamos ter diversos jogos usando as mesmas classes.
+ * Quem sabe, o mesmo servidor. */
+public abstract class JogoDeCartas {
+    private String nomeJogo;
+    private Baralho baralho;
+    private Vector jogadores;
+
+    abstract boolean joga(Carta c);
+
+    abstract void adicionaJogador(Jogador j);
+
+    abstract Vector getJogadores();
+
+    abstract Carta puxaCarta();
 }

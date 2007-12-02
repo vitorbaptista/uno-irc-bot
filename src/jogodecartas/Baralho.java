@@ -5,14 +5,14 @@
  *               Licenciado sob a GPLv3                *
  *                                                     *
  *    Feito em 2007 por Daniel Pires, Felipe Lacet,    *
- *   Nath?lia Sobral, Pedro Dantas e V?tor Baptista.   *
+ *   Nathália Sobral, Pedro Dantas e Vítor Baptista.   *
  *                                                     *
- *      UFPB - Linguagem de Programa??o 2 - 2007.2     *
+ *      UFPB - Linguagem de Programação 2 - 2007.2     *
  *                                                     *
  * =================================================== */
 
 
-package baralho;
+package jogodecartas;
 
 import java.util.Random;
 import java.util.Stack;
@@ -20,9 +20,9 @@ import java.util.Vector;
 
 
 /**
- * Trata das cartas e suas caracter??sticas.
+ * Trata das cartas e suas características.
  *
- * @author V??tor Baptista
+ * @author Vítor Baptista
  * @version %I%, %G%
  */
 public class Baralho {
@@ -31,7 +31,7 @@ public class Baralho {
     private Stack pilha = new Stack();
 
     /**
-     * Cria um baralho com o <code>tamanho</code> passado como par??metro. No
+     * Cria um baralho com o <code>tamanho</code> passado como parâmetro. No
      * caso de valores negativos ou zero, ele assume 52.
      *
      * @param tamanho tamanho do baralho
@@ -53,7 +53,7 @@ public class Baralho {
      * @see Carta
      */
     public void embaralha() {
-        /* Cria um vector com numeros de todas as cartas. */
+        /* Cria um vector com números de todas as cartas. */
         Vector v = new Vector(tamanho);
 
         for (int i = 0; i < tamanho; v.add(i++)) {
@@ -61,9 +61,9 @@ public class Baralho {
         }
 
         /* O vector anterior e usado aqui.
-         * Escolhemos um indice aleatorio, ate o maximo do tamanho do vector,
-         * o colocamos na pilha e o excluimos do vetor. Isto foi feito para
-         * evitar que perdessemos muito tempo gerando numeros aleatorios para
+         * Escolhemos um índice aleatório, até o máximo do tamanho do vector,
+         * o colocamos na pilha e o excluímos do vetor. Isto foi feito para
+         * evitar que perdessemos muito tempo gerando números aleatórios para
          * embaralhar o baralho. */
         for (int i = 0; i < tamanho; i++) {
             Random r = new Random();

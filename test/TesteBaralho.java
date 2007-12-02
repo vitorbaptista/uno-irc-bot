@@ -12,7 +12,7 @@ import static org.junit.Assert.assertEquals;
 import junit.framework.JUnit4TestAdapter;
 import java.util.Stack;
 
-import baralho.*;
+import jogodecartas.*;
 
 public class TesteBaralho {
     private Baralho b = new Baralho(52);
