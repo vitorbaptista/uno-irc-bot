@@ -14,26 +14,16 @@
 
 package jogodecartas;
 
-import java.util.Vector;
+public final class Estado {
+    public static final Estado INICIADO = new Estado("INICIADO");
+    public static final Estado FIM = new Estado("FIM");
+    private String id;
 
+    private Estado(String id) {
+        this.id = id;
+    }
 
-/* TODO: Pensar em como esta classe deve funcionar. Pensei em criá-la para podermos implementar realmente
- * as regras do jogo em uma subclasse, assim poderíamos ter diversos jogos usando as mesmas classes.
- * Quem sabe, o mesmo servidor. Talvez seria melhor usar uma interface ao invés de uma classe abstrata? */
-public interface JogoDeCartas {
-    boolean joga(Carta c);
-
-    Carta puxaCarta();
-
-    void adicionaJogador(Jogador j);
-
-    void retiraJogador(Jogador j);
-
-    Vector getJogadores();
-
-    Jogador getProximoJogador();
-
-    Estado getEstado();
-
-    Jogador getVencedor();
+    public String toString() {
+        return this.id;
+    }
 }
