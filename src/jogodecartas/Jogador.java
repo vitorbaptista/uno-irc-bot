@@ -26,7 +26,7 @@ import java.util.Set;
  * @author Vítor Baptista
  * @version %I%, %G%
  */
-public class Jogador {
+public class Jogador implements Comparable {
     private String nome;
     private Set baralho;
     private Properties caracteristicas;
@@ -107,5 +107,9 @@ public class Jogador {
      */
     public void setCaracteristica(String caracteristica, String valor) {
         caracteristicas.setProperty(caracteristica, valor);
+    }
+
+    public int compareTo(Object o) {
+        return this.nome.compareTo(((Jogador) o).getNome());
     }
 }

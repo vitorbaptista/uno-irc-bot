@@ -16,6 +16,7 @@ package jogodecartas.uno;
 
 import jogodecartas.*;
 
+import java.util.Iterator;
 import java.util.Vector;
 
 
@@ -35,18 +36,33 @@ public class Uno implements JogoDeCartas {
         return false;
     }
 
-    public Carta puxaCarta() {
+    public Carta puxa() {
         return null;
     }
 
+    public void passa() {
+    }
+
     public void adicionaJogador(Jogador j) {
+        Iterator i = jogadores.iterator();
+        boolean possuiJogador = false;
+
+        while (i.hasNext()) {
+            if (((Jogador) i.next()).getNome().equalsIgnoreCase(j.getNome())) {
+                possuiJogador = true;
+            }
+        }
+
+        if (!possuiJogador) {
+            jogadores.add(j);
+        }
     }
 
     public void retiraJogador(Jogador j) {
     }
 
     public Vector getJogadores() {
-        return null;
+        return jogadores;
     }
 
     public Jogador getProximoJogador() {
