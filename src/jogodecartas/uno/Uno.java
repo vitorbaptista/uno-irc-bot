@@ -17,30 +17,52 @@ package jogodecartas.uno;
 import jogodecartas.*;
 
 import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.ListIterator;
 import java.util.Vector;
 
 
 public class Uno implements JogoDeCartas {
-    private static final int TAMANHO_BARALHO = 108;
-    private Baralho baralho;
+    private BaralhoUno baralho;
+    private Carta cartaMesa;
     private Vector jogadores;
+    private LinkedList fila;
     private Estado estado = Estado.INICIADO;
 
     public Uno() {
-        baralho = new Baralho(TAMANHO_BARALHO);
+        baralho = new BaralhoUno();
+
+        cartaMesa = baralho.pop();
 
         jogadores = new Vector();
+        fila = new LinkedList(jogadores);
     }
 
     public boolean joga(Carta c) {
+        if ((c.getCaracteristica("COR") == cartaMesa.getCaracteristica("COR")) ||
+                (c.getCaracteristica("NUMERO") == cartaMesa.getCaracteristica(
+                    "NUMERO")) || (c.getCaracteristica("COR") == Cor.PRETO)) {
+            cartaMesa = c;
+            passa();
+
+            return true;
+        }
+
         return false;
     }
 
+    public Carta getCartaMesa() {
+        return cartaMesa;
+    }
+
     public Carta puxa() {
-        return null;
+        return baralho.pop();
     }
 
     public void passa() {
+        if (fila.size() > 1) {
+            fila.addLast(fila.poll());
+        }
     }
 
     public void adicionaJogador(Jogador j) {
@@ -55,25 +77,53 @@ public class Uno implements JogoDeCartas {
 
         if (!possuiJogador) {
             jogadores.add(j);
+            fila.add(j);
         }
     }
 
     public void retiraJogador(Jogador j) {
+        Iterator i = jogadores.iterator();
+
+        while (i.hasNext()) {
+            Jogador next = (Jogador) i.next();
+
+            if (next.getNome().equalsIgnoreCase(j.getNome())) {
+                i.remove();
+                fila.remove(next);
+
+                break;
+            }
+        }
     }
 
     public Vector getJogadores() {
         return jogadores;
     }
 
+    public Jogador[] getFila() {
+        return (Jogador[]) fila.toArray();
+    }
+
     public Jogador getProximoJogador() {
-        return null;
+        return (Jogador) fila.peek();
     }
 
     public Estado getEstado() {
-        return null;
+        return estado;
     }
 
     public Jogador getVencedor() {
         return null;
+    }
+
+    protected LinkedList inverte() {
+        LinkedList inverso = new LinkedList();
+        ListIterator iterator = jogadores.listIterator();
+
+        while (iterator.hasPrevious()) {
+            inverso.add(iterator.previous());
+        }
+
+        return inverso;
     }
 }

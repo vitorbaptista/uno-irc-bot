@@ -12,32 +12,21 @@
  * =================================================== */
 
 
-package jogodecartas;
+package jogodecartas.uno;
 
-import java.util.Vector;
+public final class Cor {
+    public static final Cor AMARELO = new Cor("AMARELO");
+    public static final Cor AZUL = new Cor("AZUL");
+    public static final Cor VERMELHO = new Cor("VERMELHO");
+    public static final Cor VERDE = new Cor("VERDE");
+    public static final Cor PRETO = new Cor("PRETO");
+    private String id;
 
+    private Cor(String id) {
+        this.id = id;
+    }
 
-/* TODO: Pensar em como esta classe deve funcionar. Pensei em criá-la para podermos implementar realmente
- * as regras do jogo em uma subclasse, assim poderíamos ter diversos jogos usando as mesmas classes.
- * Quem sabe, o mesmo servidor. Talvez seria melhor usar uma interface ao invés de uma classe abstrata? */
-public interface JogoDeCartas {
-    boolean joga(Carta c);
-
-    Carta puxa();
-
-    void passa();
-
-    Carta getCartaMesa();
-
-    void adicionaJogador(Jogador j);
-
-    void retiraJogador(Jogador j);
-
-    Vector getJogadores();
-
-    Jogador getProximoJogador();
-
-    Estado getEstado();
-
-    Jogador getVencedor();
+    public String toString() {
+        return this.id;
+    }
 }

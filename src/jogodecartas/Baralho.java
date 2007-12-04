@@ -39,9 +39,9 @@ public class Baralho {
     public Baralho(int tamanho) {
         this.tamanho = (tamanho > 0) ? tamanho : 52;
 
-        for (int i = 0; i < tamanho; i++) {
+        for (int i = tamanho - 1; i >= 0; i--) {
             Carta c = new Carta();
-            c.setCaracteristica("NUMERO", String.valueOf(i));
+            c.setCaracteristica("ID", i);
             baralho.add(c);
             pilha.push(i);
         }
@@ -53,6 +53,9 @@ public class Baralho {
      * @see Carta
      */
     public void embaralha() {
+        /* Limpa a pilha. */
+        pilha = new Stack();
+
         /* Cria um vector com números de todas as cartas. */
         Vector v = new Vector(tamanho);
 

@@ -70,6 +70,8 @@
             <formatter type="xml"/>
             <test name="test.TesteBaralho" todir="${testresultdir}"/>
             <test name="test.TesteUnoBot" todir="${testresultdir}"/>
+            <test name="test.TesteUno" todir="${testresultdir}"/>
+            <test name="test.TesteBaralhoUno" todir="${testresultdir}"/>
         </junit>
 
         <delete dir="${targetdir}/test"/>

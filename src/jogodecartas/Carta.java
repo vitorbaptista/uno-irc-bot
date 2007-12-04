@@ -14,7 +14,8 @@
 
 package jogodecartas;
 
-import java.util.Properties;
+import java.util.Dictionary;
+import java.util.Hashtable;
 
 
 /**
@@ -25,25 +26,25 @@ import java.util.Properties;
  * @version %I%, %G%
  */
 public class Carta {
-    private Properties caracteristicas;
+    private Dictionary caracteristicas;
 
     /**
      * Constructor default.
      */
     public Carta() {
-        caracteristicas = new Properties();
+        caracteristicas = new Hashtable();
     }
 
     /**
-     * Retorna uma String com o valor da característica passada por parâmetro,
-     * se existir. Se não, retorna uma string vazia.
+     * Retorna um Object com o valor da característica passada por parâmetro,
+     * se existir. Se não, retorna null.
      *
      * @param caracteristica nome da característica
      *
      * @return valor da característica passada como parâmetro
      */
-    public String getCaracteristica(String caracteristica) {
-        return caracteristicas.getProperty(caracteristica);
+    public Object getCaracteristica(String caracteristica) {
+        return caracteristicas.get(caracteristica);
     }
 
     /**
@@ -53,7 +54,7 @@ public class Carta {
      * @param caracteristica característica a ser modificada
      * @param valor valor da característica
      */
-    public void setCaracteristica(String caracteristica, String valor) {
-        caracteristicas.setProperty(caracteristica, valor);
+    public void setCaracteristica(String caracteristica, Object valor) {
+        caracteristicas.put(caracteristica, valor);
     }
 }

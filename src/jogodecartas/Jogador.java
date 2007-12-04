@@ -37,8 +37,9 @@ public class Jogador implements Comparable {
      * @param nome nome do jogador
      */
     public Jogador(String nome) {
-        this.nome = nome;
         this.baralho = new HashSet();
+        this.caracteristicas = new Properties();
+        setNome(nome);
     }
 
     /**
@@ -74,7 +75,7 @@ public class Jogador implements Comparable {
      * @param nome novo nome do jogador
      */
     public void setNome(String nome) {
-        this.nome = nome;
+        setCaracteristica("NOME", nome);
     }
 
     /**
@@ -83,7 +84,7 @@ public class Jogador implements Comparable {
      * @return nome do jogador
      */
     public String getNome() {
-        return this.nome;
+        return getCaracteristica("NOME");
     }
 
     /**
