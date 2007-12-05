@@ -68,10 +68,10 @@
             <classpath refid="test"/>
 
             <formatter type="xml"/>
-            <test name="test.TesteBaralho" todir="${testresultdir}"/>
-            <test name="test.TesteUnoBot" todir="${testresultdir}"/>
-            <test name="test.TesteUno" todir="${testresultdir}"/>
-            <test name="test.TesteBaralhoUno" todir="${testresultdir}"/>
+            <test name="test.BaralhoTest" todir="${testresultdir}"/>
+            <test name="test.UnoBotTest" todir="${testresultdir}"/>
+            <test name="test.UnoTest" todir="${testresultdir}"/>
+            <test name="test.BaralhoUnoTest" todir="${testresultdir}"/>
         </junit>
 
         <delete dir="${targetdir}/test"/>

@@ -24,60 +24,150 @@ import java.util.Vector;
 
 public class Uno implements JogoDeCartas {
     private BaralhoUno baralho;
-    private Carta cartaMesa;
     private Vector jogadores;
     private LinkedList fila;
-    private Estado estado = Estado.INICIADO;
+    private Estado estado = Estado.FIM;
+    private int numCartasPuxar = 1;
+    private boolean podePassar = false;
 
     public Uno() {
         baralho = new BaralhoUno();
 
-        cartaMesa = baralho.pop();
+        baralho.push(baralho.pop());
 
         jogadores = new Vector();
         fila = new LinkedList(jogadores);
     }
 
-    public boolean joga(Carta c) {
-        if ((c.getCaracteristica("COR") == cartaMesa.getCaracteristica("COR")) ||
-                (c.getCaracteristica("NUMERO") == cartaMesa.getCaracteristica(
-                    "NUMERO")) || (c.getCaracteristica("COR") == Cor.PRETO)) {
-            cartaMesa = c;
-            passa();
+    public int getNumCartasPuxar() {
+        return numCartasPuxar;
+    }
 
-            return true;
+    public void inicia() {
+        if ((estado != Estado.INICIADO) && (jogadores.size() > 0)) {
+            estado = Estado.INICIADO;
+
+            Iterator i = jogadores.iterator();
+
+            while (i.hasNext()) {
+                Jogador j = (Jogador) i.next();
+
+                for (int k = 0; k < 7; k++) {
+                    j.adicionaCarta(baralho.pop());
+                }
+            }
+
+            podePassar = false;
+        }
+    }
+
+    private void ataca(int valor) {
+        numCartasPuxar += ((numCartasPuxar == 1) ? (valor - 1) : valor);
+    }
+
+    public boolean joga(Carta c) {
+        if ((estado == Estado.INICIADO) && !podePassar &&
+                getProximoJogador().getBaralho().contains(c)) {
+            System.out.println("Entrou 1 - " + numCartasPuxar);
+            System.out.println((Cor) c.getCaracteristica("COR"));
+
+            if (numCartasPuxar > 1) {
+                if ((baralho.peekMorto().getCaracteristica("TIPO") == "+2") &&
+                        (c.getCaracteristica("TIPO") == "+2")) {
+                    getProximoJogador().getBaralho().remove(c);
+                    ataca(2);
+                    baralho.push(c);
+                    podePassar = true;
+                    passa();
+
+                    return true;
+                }
+            } else if ((c.getCaracteristica("COR") == baralho.peekMorto()
+                                                                 .getCaracteristica("COR")) ||
+                    (c.getCaracteristica("NUMERO") == baralho.peekMorto()
+                                                                 .getCaracteristica("NUMERO")) ||
+                    ((c.getCaracteristica("TIPO") != "NORMAL") &&
+                    (c.getCaracteristica("TIPO") == baralho.peekMorto()
+                                                               .getCaracteristica("TIPO"))) ||
+                    (c.getCaracteristica("COR") == Cor.PRETO)) {
+                System.out.println("Entrou 2");
+
+                getProximoJogador().getBaralho().remove(c);
+
+                if (c.getCaracteristica("TIPO") == "+2") {
+                    ataca(2);
+                } else if (c.getCaracteristica("TIPO") == "+4") {
+                    ataca(4);
+                } else if (c.getCaracteristica("TIPO") == "PULA") {
+                    podePassar = true;
+                    passa();
+                } else if (c.getCaracteristica("TIPO") == "INVERTE") {
+                    Jogador j = getProximoJogador();
+                    fila = inverte();
+                    baralho.push(c);
+                    podePassar = false;
+
+                    return true;
+                }
+
+                baralho.push(c);
+                podePassar = true;
+                passa();
+
+                return true;
+            }
         }
 
         return false;
     }
 
-    public Carta getCartaMesa() {
-        return cartaMesa;
+    public Carta getCartaMorto() {
+        return baralho.peekMorto();
     }
 
-    public Carta puxa() {
-        return baralho.pop();
+    public Vector puxa() {
+        if (!podePassar) {
+            Vector v = new Vector(numCartasPuxar);
+
+            for (; numCartasPuxar > 0; numCartasPuxar--) {
+                System.out.println("Adicionando carta!");
+
+                Carta c = (Carta) baralho.pop();
+                getProximoJogador().adicionaCarta(c);
+                v.add(c);
+            }
+
+            numCartasPuxar = 1;
+            podePassar = true;
+
+            return v;
+        } else {
+            return new Vector(0);
+        }
     }
 
     public void passa() {
-        if (fila.size() > 1) {
+        if (podePassar && (fila.size() > 1)) {
             fila.addLast(fila.poll());
+            podePassar = false;
         }
     }
 
     public void adicionaJogador(Jogador j) {
-        Iterator i = jogadores.iterator();
-        boolean possuiJogador = false;
+        if (estado != Estado.INICIADO) {
+            Iterator i = jogadores.iterator();
+            boolean possuiJogador = false;
 
-        while (i.hasNext()) {
-            if (((Jogador) i.next()).getNome().equalsIgnoreCase(j.getNome())) {
-                possuiJogador = true;
+            while (i.hasNext()) {
+                if (((Jogador) i.next()).getNome().equalsIgnoreCase(j.getNome())) {
+                    possuiJogador = true;
+                }
             }
-        }
 
-        if (!possuiJogador) {
-            jogadores.add(j);
-            fila.add(j);
+            if (!possuiJogador) {
+                jogadores.add(j);
+                fila.add(j);
+            }
         }
     }
 
@@ -101,7 +191,9 @@ public class Uno implements JogoDeCartas {
     }
 
     public Jogador[] getFila() {
-        return (Jogador[]) fila.toArray();
+        Jogador[] j = { new Jogador("HAH") };
+
+        return (Jogador[]) fila.toArray(j);
     }
 
     public Jogador getProximoJogador() {
@@ -118,10 +210,10 @@ public class Uno implements JogoDeCartas {
 
     protected LinkedList inverte() {
         LinkedList inverso = new LinkedList();
-        ListIterator iterator = jogadores.listIterator();
+        LinkedList normal = new LinkedList(fila);
 
-        while (iterator.hasPrevious()) {
-            inverso.add(iterator.previous());
+        while (normal.size() > 0) {
+            inverso.addFirst(normal.removeFirst());
         }
 
         return inverso;

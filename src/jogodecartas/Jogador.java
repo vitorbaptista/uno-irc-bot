@@ -70,6 +70,15 @@ public class Jogador implements Comparable {
     }
 
     /**
+     * Retorna um <code>Set</code> com o baralho do jogador.
+     *
+     * @return baralho do jogador
+     */
+    public Set getBaralho() {
+        return baralho;
+    }
+
+    /**
      * Modifica o nome do jogador.
      *
      * @param nome novo nome do jogador

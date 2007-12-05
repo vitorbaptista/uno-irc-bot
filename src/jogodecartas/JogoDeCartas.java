@@ -23,12 +23,13 @@ import java.util.Vector;
 public interface JogoDeCartas {
     boolean joga(Carta c);
 
-    Carta puxa();
+    Vector puxa();
 
     void passa();
 
-    Carta getCartaMesa();
+    void inicia();
 
+    //Carta getCartaMesa();
     void adicionaJogador(Jogador j);
 
     void retiraJogador(Jogador j);

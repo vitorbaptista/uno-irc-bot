@@ -14,7 +14,7 @@ import java.util.Stack;
 
 import jogodecartas.*;
 
-public class TesteBaralho {
+public class BaralhoTest {
     private Baralho b = new Baralho(52);
 
     @Test public void testaEmbaralhamento() {
@@ -32,6 +32,6 @@ public class TesteBaralho {
     }
 
     public static junit.framework.Test suite() {
-        return new JUnit4TestAdapter(TesteBaralho.class);
+        return new JUnit4TestAdapter(BaralhoTest.class);
     }
 }

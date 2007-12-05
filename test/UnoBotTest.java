@@ -17,7 +17,7 @@
     import jogodecartas.*;
     import jogodecartas.uno.*;
 
-    public class TesteUnoBot {
+    public class UnoBotTest {
         private UnoBot bot = new UnoBot("unobot", "irc.freenode.net");
 
         @Before public void mudaNomeBot() {
@@ -63,6 +63,6 @@
     }
 
     public static junit.framework.Test suite() {
-        return new JUnit4TestAdapter(TesteUnoBot.class);
+        return new JUnit4TestAdapter(UnoBotTest.class);
     }
 }

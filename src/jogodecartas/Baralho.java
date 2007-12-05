@@ -14,9 +14,8 @@
 
 package jogodecartas;
 
-import java.util.Random;
+import java.util.Collections;
 import java.util.Stack;
-import java.util.Vector;
 
 
 /**
@@ -26,84 +25,89 @@ import java.util.Vector;
  * @version %I%, %G%
  */
 public class Baralho {
-    private int tamanho;
-    private Vector baralho = new Vector(tamanho);
-    private Stack pilha = new Stack();
+    private int capacidade;
+    protected Stack baralho = new Stack();
 
     /**
-     * Cria um baralho com o <code>tamanho</code> passado como parâmetro. No
-     * caso de valores negativos ou zero, ele assume 52.
+     * Cria um baralho com capacidade de cartas passada como parâmetro. No caso
+     * de valores negativos, ele assume 0.
      *
-     * @param tamanho tamanho do baralho
+     * @param capacidade capacidade do baralho
      */
-    public Baralho(int tamanho) {
-        this.tamanho = (tamanho > 0) ? tamanho : 52;
+    public Baralho(int capacidade) {
+        this.capacidade = (capacidade >= 0) ? capacidade : 0;
 
-        for (int i = tamanho - 1; i >= 0; i--) {
+        for (int i = capacidade - 1; i >= 0; i--) {
             Carta c = new Carta();
             c.setCaracteristica("ID", i);
-            baralho.add(c);
-            pilha.push(i);
+            baralho.push(c);
         }
     }
 
     /**
-     * Embaralha a pilha de <code>Cartas</code>.
+     * Embaralha o baralho de <code>Cartas</code>.
      *
      * @see Carta
      */
     public void embaralha() {
-        /* Limpa a pilha. */
-        pilha = new Stack();
-
-        /* Cria um vector com números de todas as cartas. */
-        Vector v = new Vector(tamanho);
-
-        for (int i = 0; i < tamanho; v.add(i++)) {
-            ;
-        }
-
-        /* O vector anterior e usado aqui.
-         * Escolhemos um índice aleatório, até o máximo do tamanho do vector,
-         * o colocamos na pilha e o excluímos do vetor. Isto foi feito para
-         * evitar que perdessemos muito tempo gerando números aleatórios para
-         * embaralhar o baralho. */
-        for (int i = 0; i < tamanho; i++) {
-            Random r = new Random();
-            int j = r.nextInt(v.size());
-            pilha.push(v.elementAt(j));
-            v.remove(j);
-        }
+        /* Embaralha o baralho. */
+        Collections.shuffle(baralho);
     }
 
     /**
-     * Retira um objeto <code>Carta</code> do topo da pilha e o retorna.
+     * Retira um objeto <code>Carta</code> do topo da baralho e o retorna.
      *
-     * @return a carta do topo da pilha
+     * @return a carta do topo da baralho
      *
      * @see Carta
      */
     public Carta pop() {
-        return (Carta) baralho.elementAt((Integer) pilha.pop());
+        if (getTamanho() > 0) {
+            return (Carta) baralho.pop();
+        } else {
+            return null;
+        }
     }
 
     /**
-     * Retorna um {@link Stack} com a pilha de cartas.
+     * Adiciona um objeto <code>Carta</code> à baralho.
      *
-     * @return pilha de cartas
+     * @param carta <code>Carta</code> a ser adicionada.
      *
      * @see Carta
      */
-    public Stack getPilha() {
-        return this.pilha;
+    public void push(Carta carta) {
+        if (getTamanho() < capacidade) {
+            baralho.push(carta);
+        }
     }
 
     /**
-     * Retorna o <code>tamanho</code> do baralho.
+     * Retorna um {@link Stack} com o baralho de cartas.
+     *
+     * @return baralho de cartas
+     *
+     * @see Carta
+     */
+    public Stack getBaralho() {
+        return this.baralho;
+    }
+
+    /**
+     * Retorna a quantidade de cartas que o baralho contém.
      *
      * @return tamanho do baralho
      */
     public int getTamanho() {
-        return tamanho;
+        return baralho.size();
+    }
+
+    /**
+     * Retorna a capacidade de cartas do baralho.
+     *
+     * @return capacidade do baralho
+     */
+    public int getCapacidade() {
+        return capacidade;
     }
 }
