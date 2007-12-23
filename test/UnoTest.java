@@ -19,19 +19,18 @@ public class UnoTest {
 
         uno.inicia();
 
-        assertEquals("Erro ao adicionar jogadores!", 2, uno.getJogadores().size());
+        assertEquals("Erro ao adicionar jogadores!", 2, uno.getJogadores().length);
         assertEquals("Erro ao iniciar o jogo!", Estado.INICIADO, uno.getEstado());
     }
 
     @Test public void testaDistribuicaoCartas() {
-        Iterator i = uno.getJogadores().iterator();
+        Jogador[] jogadores = uno.getJogadores();
         boolean ok = true;
 
-        while (i.hasNext()) {
-            Jogador j = (Jogador) i.next();
-            Set k = j.getBaralho();
+        for(int i = 0; i < jogadores.length; i++) {
+            Set k = jogadores[i].getBaralho();
             if (k.size() != 7) {
-                System.err.println("Jogador " + j.getNome() + " possui apenas " + k.size() + " cartas.");
+                System.err.println("Jogador " + jogadores[i].getNome() + " possui apenas " + k.size() + " cartas.");
                 ok = false;
             }
         }
@@ -59,7 +58,7 @@ public class UnoTest {
     @Test public void testaGetProximoJogador() {
         Jogador j = uno.getProximoJogador();
 
-        int numJogadores = uno.getJogadores().size(),
+        int numJogadores = uno.getJogadores().length,
             numTentativas = numJogadores+1;
         
         while (!uno.getProximoJogador().getNome().equalsIgnoreCase(j.getNome()) && numTentativas > 0) {
@@ -72,9 +71,9 @@ public class UnoTest {
     @Test public void testaRetiraJogador() {
         Jogador j = uno.getProximoJogador();
 
-        int tamanhoInicial = uno.getJogadores().size();
+        int tamanhoInicial = uno.getJogadores().length;
         uno.retiraJogador(j);
-        int tamanhoFinal = uno.getJogadores().size();
+        int tamanhoFinal = uno.getJogadores().length;
 
         assertEquals("Erro ao retirar jogador! Não retirou nada.", true, tamanhoInicial > tamanhoFinal);
         assertEquals("Erro ao retirar jogador! Retirou o jogador errado.", false, j.getNome().equalsIgnoreCase(uno.getProximoJogador().getNome()));

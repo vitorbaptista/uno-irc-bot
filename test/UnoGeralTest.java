@@ -47,7 +47,28 @@ public class UnoGeralTest {
         else
             if (carta == -2)
                 uno.passa();
-            else {
+            else
+                if (carta == -3) {
+                    int c = input.nextInt();
+                    Cor cor;
+                    switch (c) {
+                        case 0:
+                            uno.setCorMorto(Cor.AMARELO);
+                            break;
+                        case 1:
+                            uno.setCorMorto(Cor.AZUL);
+                            break;
+                        case 2:
+                            uno.setCorMorto(Cor.VERDE);
+                            break;
+                        case 3:
+                            uno.setCorMorto(Cor.VERMELHO);
+                            break;
+                        default:
+                            break;
+                    }
+                }
+                else {
 
         Iterator i = uno.getProximoJogador().getBaralho().iterator();
         while (i.hasNext()) {

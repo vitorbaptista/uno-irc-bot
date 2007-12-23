@@ -16,6 +16,10 @@ package jogodecartas;
 
 public final class Estado {
     public static final Estado INICIADO = new Estado("INICIADO");
+    public static final Estado AGUARDANDO_JOGADA = new Estado("AGUARDANDO JOGADA");
+    //public static final Estado AGUARDANDO_PUXA = new Estado("AGUARDANDO PUXA");
+    public static final Estado AGUARDANDO_PASSAR = new Estado("AGUARDANDO PASSAR");
+    public static final Estado AGUARDANDO_MUDA_COR = new Estado("AGUARDANDO MUDA COR");
     public static final Estado FIM = new Estado("FIM");
     private String id;
 

@@ -18,7 +18,7 @@ import jogodecartas.uno.*;
 
 import org.jibble.pircbot.*;
 
-import java.util.Hashtable;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Vector;
@@ -29,7 +29,9 @@ public class Bot extends PircBot {
 
     public Bot() {
         this.setAutoNickChange(true);
-        jogos = new Hashtable();
+        jogos = new HashMap();
+        setMessageDelay(25);
+        setVerbose(true);
     }
 
     public Bot(String nick) {
@@ -42,7 +44,6 @@ public class Bot extends PircBot {
 
         try {
             connect(server);
-            joinChannel("#unoteste");
         } catch (Exception e) {
         }
     }
@@ -54,13 +55,11 @@ public class Bot extends PircBot {
             sendMessage(channel, sender + ": " + comando.substring(4));
         } else if (c[0].equalsIgnoreCase("jogadores")) {
             if (jogos.containsKey(channel)) {
-                Iterator i = ((JogoDeCartas) jogos.get(channel)).getJogadores()
-                              .iterator();
+                Jogador[] jogadores = ((JogoDeCartas) jogos.get(channel)).getJogadores();
                 String j = "";
 
-                while (i.hasNext()) {
-                    j += (" " + ((Jogador) i.next()).getNome());
-                }
+                for (int i = 0; i < jogadores.length; i++)
+                    j += " " + jogadores[i].getNome();
 
                 sendMessage(channel, "Jogadores: " + j);
             }

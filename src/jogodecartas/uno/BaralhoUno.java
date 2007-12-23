@@ -153,6 +153,22 @@ public class BaralhoUno extends Baralho {
         }
 
         embaralha();
+        int tmnho = getTamanho();
+        for (int i = 0; i < tmnho; i++) {
+            System.out.print(i + " - ");
+            c = pop();
+            if ((Cor) c.getCaracteristica("COR") == Cor.PRETO)
+                c.setCaracteristica("NOME", ((String) c.getCaracteristica("TIPO")));
+            else {
+                c.setCaracteristica("NOME", ((String) (((Cor) c.getCaracteristica("COR")).toString())));
+                if (((String) c.getCaracteristica("TIPO")).equalsIgnoreCase("NORMAL"))
+                    c.setCaracteristica("NOME", ((String) c.getCaracteristica("NOME")) + " " + ((Integer) c.getCaracteristica("NUMERO")));
+                else 
+                    c.setCaracteristica("NOME", ((String) c.getCaracteristica("NOME")) + " " + ((String) c.getCaracteristica("TIPO")));
+            }
+            push(c);
+        }
+        embaralha();
     }
 
     public void push(Carta carta) {

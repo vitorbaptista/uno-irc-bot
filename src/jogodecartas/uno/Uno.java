@@ -20,20 +20,30 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.ListIterator;
 import java.util.Vector;
+import java.util.Set;
 
-
+/**
+ * Classe do Uno. Implementa a interface JogoDeCartas.
+ *
+ * Possui um baralho com 108 cartas, sendo quatro 0, duas de cada de 1 a 9, de PULA, INVERTE e +2, sendo das cores AMARELO, AZUL, VERDE e VERMELHO, e quatro +4 e WILD(muda cor) PRETAs.
+ * Cada jogador recebe 7 cartas inicialmente, e uma carta é retirada para o morto. Cada jogador pode jogar cartas de mesma cor, mesmo número, ou pretas. Ganha quem descartar todas as cartas primeiro.
+ *
+ * @author Vítor Baptista
+ * @version 7.12.05
+ * @since 7.12.03 */
 public class Uno implements JogoDeCartas {
     private BaralhoUno baralho;
     private Vector jogadores;
     private LinkedList fila;
-    private Estado estado = Estado.FIM;
+    public Estado estado = Estado.FIM;
     private int numCartasPuxar = 1;
+    private int numJogadoresPassar = 1;
     private boolean podePassar = false;
+    public Cor corMorto = null;
+    private Jogador vencedor = null;
 
     public Uno() {
         baralho = new BaralhoUno();
-
-        baralho.push(baralho.pop());
 
         jogadores = new Vector();
         fila = new LinkedList(jogadores);
@@ -46,18 +56,33 @@ public class Uno implements JogoDeCartas {
     public void inicia() {
         if ((estado != Estado.INICIADO) && (jogadores.size() > 0)) {
             estado = Estado.INICIADO;
+            baralho.embaralha();
 
             Iterator i = jogadores.iterator();
 
             while (i.hasNext()) {
                 Jogador j = (Jogador) i.next();
 
-                for (int k = 0; k < 7; k++) {
+                for (int k = 0; k < 1; k++) {
                     j.adicionaCarta(baralho.pop());
                 }
             }
 
-            podePassar = false;
+
+            numCartasPuxar = 1;
+            numJogadoresPassar = 1;
+            vencedor = null;
+
+            //TODO: É provável que haja um bug aqui. Talvez a mesma carta seja colocada no morto 2x,
+            //      resultando numa carta perdida, já que, quando o baralho for embaralhado novamen-
+            //      te, só poderá haver 108 cartas, mas haverão 109.
+            baralho.push(baralho.pop());
+            joga(getCartaMorto());
+            corMorto = (Cor) getCartaMorto().getCaracteristica("COR");
+            //podePassar = false;
+            if (estado == Estado.AGUARDANDO_PASSAR)
+                estado = Estado.AGUARDANDO_JOGADA;
+ 
         }
     }
 
@@ -66,10 +91,9 @@ public class Uno implements JogoDeCartas {
     }
 
     public boolean joga(Carta c) {
-        if ((estado == Estado.INICIADO) && !podePassar &&
-                getProximoJogador().getBaralho().contains(c)) {
-            System.out.println("Entrou 1 - " + numCartasPuxar);
-            System.out.println((Cor) c.getCaracteristica("COR"));
+        //if ((estado == Estado.INICIADO) && !podePassar &&
+        //        getProximoJogador().getBaralho().contains(c)) {
+        if ((estado == Estado.AGUARDANDO_JOGADA && getProximoJogador().getBaralho().contains(c)) || estado == Estado.INICIADO) {
 
             if (numCartasPuxar > 1) {
                 if ((baralho.peekMorto().getCaracteristica("TIPO") == "+2") &&
@@ -77,42 +101,64 @@ public class Uno implements JogoDeCartas {
                     getProximoJogador().getBaralho().remove(c);
                     ataca(2);
                     baralho.push(c);
-                    podePassar = true;
-                    passa();
+                    //podePassar = true;
+                    corMorto = (Cor) c.getCaracteristica("COR");
+                    estado = Estado.AGUARDANDO_PASSAR;
+        
+                    checaFimPartida(); //Talvez isso devesse estar no fim de Joga()
+
 
                     return true;
                 }
-            } else if ((c.getCaracteristica("COR") == baralho.peekMorto()
-                                                                 .getCaracteristica("COR")) ||
-                    (c.getCaracteristica("NUMERO") == baralho.peekMorto()
-                                                                 .getCaracteristica("NUMERO")) ||
+            } else if ((c.getCaracteristica("COR") == getCorMorto()) ||
+                    (c.getCaracteristica("NUMERO") == getCartaMorto().getCaracteristica("NUMERO")) ||
+                    (c.getCaracteristica("COR") == getCorMorto() || 
                     ((c.getCaracteristica("TIPO") != "NORMAL") &&
-                    (c.getCaracteristica("TIPO") == baralho.peekMorto()
-                                                               .getCaracteristica("TIPO"))) ||
-                    (c.getCaracteristica("COR") == Cor.PRETO)) {
-                System.out.println("Entrou 2");
+                    (c.getCaracteristica("TIPO") == getCartaMorto().getCaracteristica("TIPO"))) ||
+                    (c.getCaracteristica("COR") == Cor.PRETO))) {
 
-                getProximoJogador().getBaralho().remove(c);
-
+                    getProximoJogador().getBaralho().remove(c);                    
+                    corMorto = (Cor) c.getCaracteristica("COR");
                 if (c.getCaracteristica("TIPO") == "+2") {
                     ataca(2);
                 } else if (c.getCaracteristica("TIPO") == "+4") {
                     ataca(4);
+                    baralho.push(c);
+                    estado = Estado.AGUARDANDO_MUDA_COR;
+                    checaFimPartida(); //Talvez isso devesse estar no fim de Joga()
+
+
+
+                    return true;
                 } else if (c.getCaracteristica("TIPO") == "PULA") {
-                    podePassar = true;
-                    passa();
+                    numJogadoresPassar = 2;
+                } else if ((Cor) c.getCaracteristica("COR") == Cor.PRETO) {
+                    baralho.push(c);
+                    estado = Estado.AGUARDANDO_MUDA_COR;
+                    checaFimPartida(); //Talvez isso devesse estar no fim de Joga()
+
+
+
+                    return true;
                 } else if (c.getCaracteristica("TIPO") == "INVERTE") {
+                    // Há um bug aqui. Quando ele inverte, ele já passa direto.
+                    // Este não é o comportamento esperado. Ele deve inverter e esperar o jogador
+                    // passar.
                     Jogador j = getProximoJogador();
                     fila = inverte();
                     baralho.push(c);
-                    podePassar = false;
+                    //podePassar = false;
+                    estado = Estado.AGUARDANDO_JOGADA;
+                    checaFimPartida(); //Talvez isso devesse estar no fim de Joga()
+
 
                     return true;
                 }
 
                 baralho.push(c);
-                podePassar = true;
-                passa();
+                estado = Estado.AGUARDANDO_PASSAR;
+                checaFimPartida(); //Talvez isso devesse estar no fim de Joga()
+
 
                 return true;
             }
@@ -121,12 +167,45 @@ public class Uno implements JogoDeCartas {
         return false;
     }
 
+    public boolean joga(String nomeCarta) {
+        Carta aux = null;
+        Object[] cartas = getProximoJogador().getBaralho().toArray();
+
+        System.out.print("Tentando jogar: " + nomeCarta);
+        for (int i = 0; i < cartas.length; i++) {
+            System.out.print((((Carta) cartas[i])).getCaracteristica("NOME") + "\t");
+            if (((String) ((Carta) cartas[i]).getCaracteristica("NOME")).equalsIgnoreCase(nomeCarta)) {
+                aux = (Carta) cartas[i];
+                System.out.println();
+                return joga(aux);
+            }
+        }
+
+        System.out.println();
+        return false;
+    }
+
     public Carta getCartaMorto() {
         return baralho.peekMorto();
     }
 
+    public Cor getCorMorto() {
+        return (baralho.peekMorto().getCaracteristica("COR") == Cor.PRETO) ? corMorto : (Cor) baralho.peekMorto().getCaracteristica("COR");
+    }
+
+    //Há um bug aqui. Caso a primeira carta jogada seja uma preta, quando o jogador
+    //for trocar a cor, ele não poderá jogar imediatamente após, já terá passado.
+    public void setCorMorto(Cor c) {
+        System.out.println("Entrou no set");
+        if (estado == Estado.AGUARDANDO_MUDA_COR) {// && corMorto == Cor.PRETO) {
+            System.out.println("Entrou no if do set");
+            corMorto = c;
+            estado = Estado.AGUARDANDO_PASSAR;
+        }
+    }
+
     public Vector puxa() {
-        if (!podePassar) {
+        if (estado != Estado.AGUARDANDO_PASSAR) {
             Vector v = new Vector(numCartasPuxar);
 
             for (; numCartasPuxar > 0; numCartasPuxar--) {
@@ -138,7 +217,8 @@ public class Uno implements JogoDeCartas {
             }
 
             numCartasPuxar = 1;
-            podePassar = true;
+            //podePassar = true;
+            estado = Estado.AGUARDANDO_PASSAR;
 
             return v;
         } else {
@@ -146,11 +226,19 @@ public class Uno implements JogoDeCartas {
         }
     }
 
-    public void passa() {
-        if (podePassar && (fila.size() > 1)) {
-            fila.addLast(fila.poll());
-            podePassar = false;
+    public boolean passa() {
+        if (estado == Estado.AGUARDANDO_PASSAR && (fila.size() > 1)) {
+            for (; numJogadoresPassar > 0; numJogadoresPassar--)
+                fila.addLast(fila.poll());
+            numJogadoresPassar = 1;
+
+            //podePassar = false;
+            estado = Estado.AGUARDANDO_JOGADA;
+
+            return true;
         }
+
+        return false;
     }
 
     public void adicionaJogador(Jogador j) {
@@ -186,12 +274,13 @@ public class Uno implements JogoDeCartas {
         }
     }
 
-    public Vector getJogadores() {
+    /*public Vector getJogadores() {
         return jogadores;
-    }
+    }*/
 
-    public Jogador[] getFila() {
-        Jogador[] j = { new Jogador("HAH") };
+    public Jogador[] getJogadores() {
+        // Este jogador só é criado pois a toArray retorna o mesmo tipo passado como argumento.
+        Jogador[] j = { new Jogador("") };
 
         return (Jogador[]) fila.toArray(j);
     }
@@ -204,8 +293,26 @@ public class Uno implements JogoDeCartas {
         return estado;
     }
 
+    private void checaFimPartida() {
+        Jogador[] jogadores = getJogadores();
+
+        if (jogadores.length == 0)
+            estado = Estado.FIM;
+        else if (jogadores.length == 1) {
+            vencedor = jogadores[i];
+            estado = Estado.FIM;
+        }
+        else
+            for (int i = 0; i < jogadores.length; i++)
+                if (jogadores[i].getBaralho().isEmpty()) {
+                    vencedor = jogadores[i];
+                    estado = Estado.FIM;
+                    break;
+                }
+    }
+
     public Jogador getVencedor() {
-        return null;
+        return vencedor;
     }
 
     protected LinkedList inverte() {
