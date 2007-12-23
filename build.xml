@@ -1,0 +1,123 @@
+<project name="uno" default="compile">
+
+    <property name="sourcedir" value="${basedir}/src"/>
+    <property name="targetdir" value="${basedir}/bin"/>
+    <property name="librarydir" value="${basedir}/lib"/>
+    <property name="devlibrarydir" value="${librarydir}/dev"/>
+    <property name="testdir" value="${basedir}/test"/>
+    <property name="testresultdir" value="${testdir}/result"/>
+
+    <path id="libraries">
+        <fileset dir="${librarydir}">
+            <include name="*.jar"/>
+        </fileset>
+
+       <fileset dir="${devlibrarydir}">
+            <include name="*.jar"/>
+        </fileset>
+   </path>
+
+    <path id="test">
+        <path refid="libraries"/>
+        <pathelement location="${targetdir}"/>
+    </path>
+
+    <path id="project">
+        <pathelement location="${targetdir}"/>
+        <path refid="libraries"/>
+    </path>
+
+    <target name="init">
+        <tstamp/>
+    </target>
+
+    <target name="clean" depends="init">
+        <!--<delete dir="${targetdir}"/>
+        <mkdir dir="${targetdir}"/>
+        <delete dir="${testresultdir}"/>
+        <mkdir dir="${testresultdir}"/>-->
+    </target>
+
+    <target name="compile" depends="clean, copy-resources">
+        <javac destdir="${targetdir}">
+            <src path="${sourcedir}"/>
+            <src path="${testdir}"/>
+            <classpath refid="libraries"/>
+        </javac>
+    </target>
+
+    <target name="jar" depends="test, compile">
+        <jar jarfile="${targetdir}/uno.jar">
+            <fileset dir="${targetdir}">
+                <exclude name="test"/>
+                <exclude name="**/*Test*"/>
+            </fileset>
+        </jar>
+    </target>
+
+    <target name="copy-resources">
+        <copy todir="${targetdir}">
+            <fileset dir="${sourcedir}">
+                <exclude name="**/*.java"/>
+            </fileset>
+        </copy>
+    </target>
+
+    <target name="test" depends="compile">
+        <junit printsummary="yes" fork="no" haltonfailure="yes">
+            <classpath refid="test"/>
+
+            <formatter type="xml"/>
+            <test name="test.BaralhoTest" todir="${testresultdir}"/>
+            <test name="test.UnoBotTest" todir="${testresultdir}"/>
+            <test name="test.UnoTest" todir="${testresultdir}"/>
+            <test name="test.BaralhoUnoTest" todir="${testresultdir}"/>
+        </junit>
+
+        <delete dir="${targetdir}/test"/>
+    </target>
+
+    <target name="doc" depends="clean">
+        <javadoc 
+            packagenames="jogodecartas.*"
+            destdir="doc"
+            author="true"
+            version="true"
+            use="true"
+            windowtitle="${ant.project.name}"
+            encoding="utf-8">
+            <doctitle><![CDATA[<h1>${ant.project.name}</h1>]]></doctitle>
+            <fileset dir="${sourcedir}">
+                <include name="**/*.java"/>
+            </fileset>
+        </javadoc>
+    </target>
+
+    <taskdef name="jalopy" classname="de.hunsicker.jalopy.plugin.ant.AntPlugin" classpathref="libraries"/>
+
+    <target name="format" depends="compile">
+        <jalopy 
+                convention="${devlibrarydir}/uno-convention-code.xml"
+                fileformat="unix"
+                history="file"
+                historymethod="adler32"
+                loglevel="info"
+                threads="2"
+                classpathref="project"
+                backup="yes">
+             <fileset dir="${sourcedir}">
+                 <include name="**/*.java"/>
+             </fileset>
+         </jalopy>
+    </target>
+
+    <target name="all" depends="compile, test, jar, doc, format"/>
+    
+    <target name="run" depends="compile">
+        <java fork="true" classname="test.UnoBotTeste" classpathref="libraries">
+            <classpath path="${targetdir}"/>
+            <arg value="${action}"/>
+        </java>
+    </target>
+
+</project>
