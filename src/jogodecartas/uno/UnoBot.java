@@ -40,45 +40,27 @@ public class UnoBot extends Bot {
                     sender));
         }
         else {
-
-        Uno uno = (Uno) jogos.get(channel);
-        if (uno == null) sendMessage(channel, "Não há jogo neste canal");
-        Jogador[] jogadores = uno.getJogadores();
-
-
-            Jogador j = null;
-            for (int i = 0; i < jogadores.length; i++)
-                if (jogadores[i].getNome().equalsIgnoreCase(sender))
-                    j = jogadores[i];
-
-            boolean estaNaVez = (j == uno.getProximoJogador());
+            Uno uno = (Uno) jogos.get(channel);
+            if (uno == null) {
+                sendMessage(channel, "Não há jogo neste canal");
+                return;
+            }
 
             if (jogos.containsKey(channel) && c[0].equalsIgnoreCase("inicia") && uno.getEstado() == Estado.FIM) {
                 sendMessage(channel, "Iniciando jogo...");
                 uno.inicia();
+                return;
             }
-            if (jogos.containsKey(channel) && j != null && uno.getEstado() != Estado.FIM) {
-                if (c[0].equalsIgnoreCase("exibe"))
-                        exibe(channel);
-                if (c[0].equalsIgnoreCase("sai"))
-                    uno.retiraJogador(j);
-                if (estaNaVez) {
+
+            if (uno.getEstado() != Estado.FIM) {
+                if (uno.getProximoJogador().getNome().equalsIgnoreCase(sender)) {
                     System.out.println("Esta na vez");
                     if (c[0].equalsIgnoreCase("puxa"))
                         uno.puxa();
                     else if (c[0].equalsIgnoreCase("passa")) {
                             uno.passa();
-                            exibe(channel);
+                            info(channel);
                     }
-                    else if (c[0].equalsIgnoreCase("joga")) {
-                            //sendMessage(channel, sender + " jogando...");
-                            if (c.length == 2) 
-                                uno.joga(c[1]);
-                            else if (c.length == 3) 
-                                uno.joga(c[1] + " " + c[2]);
-
-                            checaFimJogo(channel);
-                            }
                     else if (c.length == 2 && c[0].equalsIgnoreCase("cor")) {
                         if (c[1].equalsIgnoreCase("AMARELO")) uno.setCorMorto(Cor.AMARELO);
                         else if (c[1].equalsIgnoreCase("AZUL")) uno.setCorMorto(Cor.AZUL);
@@ -142,7 +124,7 @@ public class UnoBot extends Bot {
 
     }
 
-    private void exibe(String channel) {
+    private void info(String channel) {
         Uno uno = (Uno) jogos.get(channel);
 
         //sendMessage(channel, uno.getEstado().toString());

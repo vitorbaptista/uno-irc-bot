@@ -40,6 +40,17 @@ public interface JogoDeCartas {
     boolean joga(Carta c);
 
     /**
+     * <code>String</code> com o nome da carta a ser jogada na mesa.
+     *
+     * Retorna um boolean indicando se teve sucesso ou não ao jogar a carta.
+     *
+     * @param c <code>String</code> com o nome da carta a ser jogada.
+     * @return boolean foi jogada com sucesso?
+     *
+     * @see Carta */
+    boolean joga(String c);
+
+    /**
      * Puxa cartas. Retorna um vector com todas as cartas que ele deveria puxar.
      *
      * @return Vector cartas que precisava puxar. */

@@ -51,18 +51,61 @@ public class Bot extends PircBot {
     protected void processaComando(String channel, String sender, String comando) {
         String[] c = comando.split("\\s");
 
-        if (c[0].equalsIgnoreCase("msg")) {
-            sendMessage(channel, sender + ": " + comando.substring(4));
-        } else if (c[0].equalsIgnoreCase("jogadores")) {
-            if (jogos.containsKey(channel)) {
-                Jogador[] jogadores = ((JogoDeCartas) jogos.get(channel)).getJogadores();
-                String j = "";
+        // Se houver um jogo no canal onde recebeu a mensagem...
+        if (jogos.containsKey(channel)) {
+            JogoDeCartas jogo = (JogoDeCartas) jogos.get(channel);
+            Jogador[] jogadores = uno.getJogadores();
 
-                for (int i = 0; i < jogadores.length; i++)
-                    j += " " + jogadores[i].getNome();
+            Jogador j = null;
+            for (int i = 0; i < jogadores.length; i++)
+                if (jogadores[i].getNome().equalsIgnoreCase(sender))
+                    j = jogadores[i];
 
-                sendMessage(channel, "Jogadores: " + j);
+            boolean estaNaVez = (j == uno.getProximoJogador());
+
+            // Caso ele queira ver os jogadores...
+            if (c[0].equalsIgnoreCase("jogadores")) {
+                    Jogador[] jogadores = jogo.getJogadores();
+                    String j = "";
+
+                    for (int i = 0; i < jogadores.length; i++)
+                        j += " " + jogadores[i].getNome();
+
+                    sendMessage(channel, "Jogadores: " + j);
+            }
+            // ou caso ele queira jogar uma carta
+            else if (estaNaVez && c[0].equalsIgnoreCase("joga")) {
+                String nomeCarta = "";
+                for (int i = 1; i < c.length; i++)
+                    nomeCarta += c[i] + " ";
+                jogo.joga(nomeCarta.trim());
+            }
+           else if (c[0].equalsIgnoreCase("sai")) {
+                  jogo.retiraJogador(j);
             }
         }
+        
+        if (c[0].equalsIgnoreCase("info")) {
+            info(channel);
+        }
+    }
+
+    protected void info(String channel) {
+        if (jogos.containsKey(channel)) {
+            JogoDeCartas jogo = (JogoDeCartas) jogos.get(channel);
+
+            // Formata a lista de jogadores p/ escrever
+            Jogador js[] = uno.getJogadores();
+            String jogadoresString = "Jogadores: ";
+            if (js.length > 0)
+                jogadoresString = Colors.BOLD + js[0].getNome() + Colors.NORMAL + " ";
+            for (int i = 1; i < js.length; i++)
+                jogadoresString = jogadoresString + js[i].getNome() + Colors.NORMAL + " "; 
+        
+            sendMessage(channel, jogadoresString);
+
+
+        }
+
     }
 }

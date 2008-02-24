@@ -20,7 +20,7 @@ public class UnoTest {
         uno.inicia();
 
         assertEquals("Erro ao adicionar jogadores!", 2, uno.getJogadores().length);
-        assertEquals("Erro ao iniciar o jogo!", Estado.INICIADO, uno.getEstado());
+        assertEquals("Erro ao iniciar o jogo!", Estado.JOGA, uno.getEstado());
     }
 
     @Test public void testaDistribuicaoCartas() {
