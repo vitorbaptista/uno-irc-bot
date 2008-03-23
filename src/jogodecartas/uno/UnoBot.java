@@ -57,10 +57,22 @@ public class UnoBot extends Bot {
                     System.out.println("Esta na vez");
                     if (c[0].equalsIgnoreCase("puxa"))
                         uno.puxa();
+                        info(channel);
+                    else if (c[0].equalsIgnoreCase("info"))
+                        info(channel);
                     else if (c[0].equalsIgnoreCase("passa")) {
-                            uno.passa();
-                            info(channel);
+                        uno.passa();
+                        info(channel);
                     }
+                    else if (c[0].equalsIgnoreCase("joga")) {
+                        if (c.length == 2) 
+                            uno.joga(c[1]);
+                        else if (c.length == 3) 
+                            uno.joga(c[1] + " " + c[2]);
+
+                        checaFimJogo(channel);
+                    }
+
                     else if (c.length == 2 && c[0].equalsIgnoreCase("cor")) {
                         if (c[1].equalsIgnoreCase("AMARELO")) uno.setCorMorto(Cor.AMARELO);
                         else if (c[1].equalsIgnoreCase("AZUL")) uno.setCorMorto(Cor.AZUL);
