@@ -55,9 +55,10 @@ public class UnoBot extends Bot {
             if (uno.getEstado() != Estado.FIM) {
                 if (uno.getProximoJogador().getNome().equalsIgnoreCase(sender)) {
                     System.out.println("Esta na vez");
-                    if (c[0].equalsIgnoreCase("puxa"))
+                    if (c[0].equalsIgnoreCase("puxa")) {
                         uno.puxa();
                         info(channel);
+                    }
                     else if (c[0].equalsIgnoreCase("info"))
                         info(channel);
                     else if (c[0].equalsIgnoreCase("passa")) {
