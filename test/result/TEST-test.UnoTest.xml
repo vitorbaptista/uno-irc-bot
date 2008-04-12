@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuite errors="0" failures="0" hostname="psychomachia" name="test.UnoTest" tests="4" time="0.117" timestamp="2008-04-12T18:19:17">
+  <properties>
+    <property name="java.runtime.name" value="Java(TM) SE Runtime Environment" />
+    <property name="sun.boot.library.path" value="/opt/sun-jdk-1.6.0.03/jre/lib/i386" />
+    <property name="java.vm.version" value="1.6.0_03-b05" />
+    <property name="ant.library.dir" value="/usr/share/ant-core/lib" />
+    <property name="ant.version" value="Apache Ant version 1.7.0 compiled on July 23 2007" />
+    <property name="ant.java.version" value="1.6" />
+    <property name="java.vm.vendor" value="Sun Microsystems Inc." />
+    <property name="java.vendor.url" value="http://java.sun.com/" />
+    <property name="sourcedir" value="/home/vitor/Programacao/UFPB/LP2/uno/branches/refactor/src" />
+    <property name="path.separator" value=":" />
+    <property name="java.vm.name" value="Java HotSpot(TM) Client VM" />
+    <property name="file.encoding.pkg" value="sun.io" />
+    <property name="user.country" value="BR" />
+    <property name="sun.java.launcher" value="SUN_STANDARD" />
+    <property name="sun.os.patch.level" value="unknown" />
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification" />
+    <property name="user.dir" value="/home/vitor/Programacao/UFPB/LP2/uno/branches/refactor" />
+    <property name="testresultdir" value="/home/vitor/Programacao/UFPB/LP2/uno/branches/refactor/test/result" />
+    <property name="java.runtime.version" value="1.6.0_03-b05" />
+    <property name="java.awt.graphicsenv" value="sun.awt.X11GraphicsEnvironment" />
+    <property name="basedir" value="/home/vitor/Programacao/UFPB/LP2/uno/branches/refactor" />
+    <property name="java.endorsed.dirs" value="/opt/sun-jdk-1.6.0.03/jre/lib/endorsed" />
+    <property name="os.arch" value="i386" />
+    <property name="java.io.tmpdir" value="/tmp" />
+    <property name="ant.core.lib" value="/usr/share/ant-core/lib/ant.jar" />
+    <property name="line.separator" value="
+" />
+    <property name="java.vm.specification.vendor" value="Sun Microsystems Inc." />
+    <property name="os.name" value="Linux" />
+    <property name="DSTAMP" value="20080412" />
+    <property name="ant.home" value="/usr/share/ant-core" />
+    <property name="ant.project.name" value="uno" />
+    <property name="targetdir" value="/home/vitor/Programacao/UFPB/LP2/uno/branches/refactor/bin" />
+    <property name="sun.jnu.encoding" value="UTF-8" />
+    <property name="TODAY" value="April 12 2008" />
+    <property name="java.library.path" value="/usr/lib/libreadline-java" />
+    <property name="java.class.version" value="50.0" />
+    <property name="java.specification.name" value="Java Platform API Specification" />
+    <property name="sun.management.compiler" value="HotSpot Client Compiler" />
+    <property name="testdir" value="/home/vitor/Programacao/UFPB/LP2/uno/branches/refactor/test" />
+    <property name="os.version" value="2.6.23-gentoo-r3" />
+    <property name="ant.file" value="/home/vitor/Programacao/UFPB/LP2/uno/branches/refactor/build.xml" />
+    <property name="user.home" value="/home/vitor" />
+    <property name="user.timezone" value="" />
+    <property name="java.awt.printerjob" value="sun.print.PSPrinterJob" />
+    <property name="java.specification.version" value="1.6" />
+    <property name="librarydir" value="/home/vitor/Programacao/UFPB/LP2/uno/branches/refactor/lib" />
+    <property name="file.encoding" value="UTF-8" />
+    <property name="ant.file.uno" value="/home/vitor/Programacao/UFPB/LP2/uno/branches/refactor/build.xml" />
+    <property name="TSTAMP" value="1519" />
+    <property name="java.class.path" value="/usr/share/ant-core/lib/ant-launcher.jar:/opt/sun-jdk-1.6.0.03/lib/tools.jar:/home/vitor/Programacao/UFPB/LP2/uno/branches/refactor/.:/usr/share/commons-logging/lib/commons-logging.jar:/usr/share/bsf-2.3/lib/bsf.jar:/usr/share/xerces-2/lib/xercesImpl.jar:/usr/share/xml-commons-resolver/lib/xml-commons-resolver.jar:/usr/share/ant-core/lib/ant.jar:/usr/share/ant-junit/lib/ant-junit.jar:/usr/share/jdepend/lib/jdepend.jar:/usr/share/jarjar-1/lib/jarjar.jar:/usr/share/jzlib/lib/jzlib.jar:/usr/share/ant-jsch/lib/ant-jsch.jar:/usr/share/gnu-regexp-1/lib/gnu-regexp.jar:/usr/share/ant-antlr/lib/ant-antlr.jar:/usr/share/ant-apache-resolver/lib/ant-apache-resolver.jar:/usr/share/ant-trax/lib/ant-trax.jar:/usr/share/libreadline-java/lib/libreadline-java.jar:/usr/share/ant-nodeps/lib/ant-nodeps.jar:/usr/share/asm-2/lib/asm.jar:/usr/share/xalan/lib/xalan.jar:/usr/share/jsch/lib/jsch.jar:/usr/share/ant-commons-logging/lib/ant-commons-logging.jar:/usr/share/asm-2/lib/asm-tree.jar:/usr/share/jython/lib/jython.jar:/usr/share/xml-commons-external-1.3/lib/xml-apis.jar:/usr/share/ant-apache-regexp/lib/ant-apache-regexp.jar:/usr/share/servletapi-2.4/lib/jsp-api.jar:/usr/share/xalan-serializer/lib/serializer.jar:/usr/share/ant-jmf/lib/ant-jmf.jar:/usr/share/asm-2/lib/asm-xml.jar:/usr/share/emma/lib/emma.jar:/usr/share/antlr/lib/antlr.jar:/usr/share/jakarta-regexp-1.3/lib/jakarta-regexp.jar:/usr/share/ant-apache-log4j/lib/ant-apache-log4j.jar:/usr/share/ant-core/lib/ant-launcher.jar:/usr/share/bcel/lib/bcel.jar:/usr/share/servletapi-2.4/lib/servlet-api.jar:/usr/share/asm-2/lib/asm-util.jar:/usr/share/ant-jdepend/lib/ant-jdepend.jar:/usr/share/javacup/lib/javacup.jar:/usr/share/ant-commons-net/lib/ant-commons-net.jar:/usr/share/emma/lib/emma_ant.jar:/usr/share/jakarta-oro-2.0/lib/jakarta-oro.jar:/usr/share/jakarta-regexp-1.4/lib/jakarta-regexp.jar:/usr/share/asm-2/lib/asm-attrs.jar:/usr/share/commons-logging/lib/commons-logging-api.jar:/usr/share/asm-2/lib/asm-analysis.jar:/usr/share/ant-swing/lib/ant-swing.jar:/usr/share/ant-apache-oro/lib/ant-apache-oro.jar:/usr/share/junit/lib/junit.jar:/usr/share/java-getopt-1/lib/gnu.getopt.jar:/usr/share/log4j/lib/log4j.jar:/usr/share/commons-logging/lib/commons-logging-adapters.jar:/usr/share/commons-net/lib/commons-net.jar:/usr/share/asm-2/lib/asm-commons.jar:/usr/share/bsh/lib/bsh.jar:/usr/share/ant-core/lib/ant-bootstrap.jar:/usr/share/ant-apache-bcel/lib/ant-apache-bcel.jar:/usr/share/qdox-1.6/lib/qdox.jar:/usr/share/ant-apache-bsf/lib/ant-apache-bsf.jar:/usr/share/xml-commons-external-1.3/lib/xml-apis-ext.jar:/usr/share/ant-core/lib/ant.jar:/usr/share/ant-core/lib/ant-launcher.jar:/usr/share/ant-core/lib/junit.jar:/usr/share/ant-core/lib/pmd.jar:/usr/share/ant-core/lib/ant-bootstrap.jar:/usr/share/ant-core/lib/checkstyle.jar" />
+    <property name="user.name" value="vitor" />
+    <property name="devlibrarydir" value="/home/vitor/Programacao/UFPB/LP2/uno/branches/refactor/lib/dev" />
+    <property name="java.vm.specification.version" value="1.0" />
+    <property name="java.home" value="/opt/sun-jdk-1.6.0.03/jre" />
+    <property name="sun.arch.data.model" value="32" />
+    <property name="user.language" value="pt" />
+    <property name="java.specification.vendor" value="Sun Microsystems Inc." />
+    <property name="java.vm.info" value="mixed mode" />
+    <property name="java.version" value="1.6.0_03" />
+    <property name="java.ext.dirs" value="/opt/sun-jdk-1.6.0.03/jre/lib/ext:/usr/java/packages/lib/ext" />
+    <property name="sun.boot.class.path" value="/opt/sun-jdk-1.6.0.03/jre/lib/resources.jar:/opt/sun-jdk-1.6.0.03/jre/lib/rt.jar:/opt/sun-jdk-1.6.0.03/jre/lib/sunrsasign.jar:/opt/sun-jdk-1.6.0.03/jre/lib/jsse.jar:/opt/sun-jdk-1.6.0.03/jre/lib/jce.jar:/opt/sun-jdk-1.6.0.03/jre/lib/charsets.jar:/opt/sun-jdk-1.6.0.03/jre/classes" />
+    <property name="java.vendor" value="Sun Microsystems Inc." />
+    <property name="file.separator" value="/" />
+    <property name="java.vendor.url.bug" value="http://java.sun.com/cgi-bin/bugreport.cgi" />
+    <property name="sun.io.unicode.encoding" value="UnicodeLittle" />
+    <property name="sun.cpu.endian" value="little" />
+    <property name="sun.desktop" value="gnome" />
+    <property name="sun.cpu.isalist" value="" />
+  </properties>
+  <testcase classname="test.UnoTest" name="testaDistribuicaoCartas" time="0.015" />
+  <testcase classname="test.UnoTest" name="testaJoga" time="0.0040" />
+  <testcase classname="test.UnoTest" name="testaGetProximoJogador" time="0.0030" />
+  <testcase classname="test.UnoTest" name="testaRetiraJogador" time="0.0050" />
+  <system-out><![CDATA[107 - WILD|	106 - +4|	105 - WILD|	104 - +4|	103 - WILD|	102 - +4|	101 - WILD|	100 - +4|	99 - INVERTE VERMELHO|	98 - INVERTE VERDE|	97 - INVERTE AZUL|	96 - INVERTE AMARELO|	95 - PULA VERMELHO|	94 - PULA VERDE|	93 - PULA AZUL|	92 - PULA AMARELO|	91 - +2 VERMELHO|	90 - +2 VERDE|	89 - +2 AZUL|	88 - +2 AMARELO|	87 - 8 VERMELHO|	86 - 8 VERDE|	85 - 8 AZUL|	84 - 8 AMARELO|	83 - 7 VERMELHO|	82 - 7 VERDE|	81 - 7 AZUL|	80 - 7 AMARELO|	79 - 6 VERMELHO|	78 - 6 VERDE|	77 - 6 AZUL|	76 - 6 AMARELO|	75 - 5 VERMELHO|	74 - 5 VERDE|	73 - 5 AZUL|	72 - 5 AMARELO|	71 - 4 VERMELHO|	70 - 4 VERDE|	69 - 4 AZUL|	68 - 4 AMARELO|	67 - 3 VERMELHO|	66 - 3 VERDE|	65 - 3 AZUL|	64 - 3 AMARELO|	63 - 2 VERMELHO|	62 - 2 VERDE|	61 - 2 AZUL|	60 - 2 AMARELO|	59 - 1 VERMELHO|	58 - 1 VERDE|	57 - 1 AZUL|	56 - 1 AMARELO|	55 - 0 VERMELHO|	54 - 0 VERDE|	53 - 0 AZUL|	52 - 0 AMARELO|	51 - INVERTE VERMELHO|	50 - INVERTE VERDE|	49 - INVERTE AZUL|	48 - INVERTE AMARELO|	47 - PULA VERMELHO|	46 - PULA VERDE|	45 - PULA AZUL|	44 - PULA AMARELO|	43 - +2 VERMELHO|	42 - +2 VERDE|	41 - +2 AZUL|	40 - +2 AMARELO|	39 - 8 VERMELHO|	38 - 8 VERDE|	37 - 8 AZUL|	36 - 8 AMARELO|	35 - 7 VERMELHO|	34 - 7 VERDE|	33 - 7 AZUL|	32 - 7 AMARELO|	31 - 6 VERMELHO|	30 - 6 VERDE|	29 - 6 AZUL|	28 - 6 AMARELO|	27 - 5 VERMELHO|	26 - 5 VERDE|	25 - 5 AZUL|	24 - 5 AMARELO|	23 - 4 VERMELHO|	22 - 4 VERDE|	21 - 4 AZUL|	20 - 4 AMARELO|	19 - 3 VERMELHO|	18 - 3 VERDE|	17 - 3 AZUL|	16 - 3 AMARELO|	15 - 2 VERMELHO|	14 - 2 VERDE|	13 - 2 AZUL|	12 - 2 AMARELO|	11 - 1 VERMELHO|	10 - 1 VERDE|	9 - 1 AZUL|	8 - 1 AMARELO|	7 - 0 VERMELHO|	6 - 0 VERDE|	5 - 0 AZUL|	4 - 0 AMARELO|	3 - 0 VERMELHO|	2 - 0 VERDE|	1 - 0 AZUL|	0 - 0 AMARELO|	Pode jogar? Entrou no pode jogar
+!eMais4: true	!conservaMais2: true	mesmaCor: true	mesmoNumero: true	mesmoTipo: false	cartaPreta: false	cartaMortoPreta: false
+SIM!
+107 - WILD|	106 - +4|	105 - WILD|	104 - +4|	103 - WILD|	102 - +4|	101 - WILD|	100 - +4|	99 - INVERTE VERMELHO|	98 - INVERTE VERDE|	97 - INVERTE AZUL|	96 - INVERTE AMARELO|	95 - PULA VERMELHO|	94 - PULA VERDE|	93 - PULA AZUL|	92 - PULA AMARELO|	91 - +2 VERMELHO|	90 - +2 VERDE|	89 - +2 AZUL|	88 - +2 AMARELO|	87 - 8 VERMELHO|	86 - 8 VERDE|	85 - 8 AZUL|	84 - 8 AMARELO|	83 - 7 VERMELHO|	82 - 7 VERDE|	81 - 7 AZUL|	80 - 7 AMARELO|	79 - 6 VERMELHO|	78 - 6 VERDE|	77 - 6 AZUL|	76 - 6 AMARELO|	75 - 5 VERMELHO|	74 - 5 VERDE|	73 - 5 AZUL|	72 - 5 AMARELO|	71 - 4 VERMELHO|	70 - 4 VERDE|	69 - 4 AZUL|	68 - 4 AMARELO|	67 - 3 VERMELHO|	66 - 3 VERDE|	65 - 3 AZUL|	64 - 3 AMARELO|	63 - 2 VERMELHO|	62 - 2 VERDE|	61 - 2 AZUL|	60 - 2 AMARELO|	59 - 1 VERMELHO|	58 - 1 VERDE|	57 - 1 AZUL|	56 - 1 AMARELO|	55 - 0 VERMELHO|	54 - 0 VERDE|	53 - 0 AZUL|	52 - 0 AMARELO|	51 - INVERTE VERMELHO|	50 - INVERTE VERDE|	49 - INVERTE AZUL|	48 - INVERTE AMARELO|	47 - PULA VERMELHO|	46 - PULA VERDE|	45 - PULA AZUL|	44 - PULA AMARELO|	43 - +2 VERMELHO|	42 - +2 VERDE|	41 - +2 AZUL|	40 - +2 AMARELO|	39 - 8 VERMELHO|	38 - 8 VERDE|	37 - 8 AZUL|	36 - 8 AMARELO|	35 - 7 VERMELHO|	34 - 7 VERDE|	33 - 7 AZUL|	32 - 7 AMARELO|	31 - 6 VERMELHO|	30 - 6 VERDE|	29 - 6 AZUL|	28 - 6 AMARELO|	27 - 5 VERMELHO|	26 - 5 VERDE|	25 - 5 AZUL|	24 - 5 AMARELO|	23 - 4 VERMELHO|	22 - 4 VERDE|	21 - 4 AZUL|	20 - 4 AMARELO|	19 - 3 VERMELHO|	18 - 3 VERDE|	17 - 3 AZUL|	16 - 3 AMARELO|	15 - 2 VERMELHO|	14 - 2 VERDE|	13 - 2 AZUL|	12 - 2 AMARELO|	11 - 1 VERMELHO|	10 - 1 VERDE|	9 - 1 AZUL|	8 - 1 AMARELO|	7 - 0 VERMELHO|	6 - 0 VERDE|	5 - 0 AZUL|	4 - 0 AMARELO|	3 - 0 VERMELHO|	2 - 0 VERDE|	1 - 0 AZUL|	0 - 0 AMARELO|	Pode jogar? Entrou no pode jogar
+!eMais4: true	!conservaMais2: true	mesmaCor: true	mesmoNumero: true	mesmoTipo: false	cartaPreta: false	cartaMortoPreta: false
+SIM!
+Carta no Morto: (59) NORMAL - 1 - VERMELHO
+Tentou jogar: (38) NORMAL - 8 - VERDE
+Pode jogar? Entrou no pode jogar
+!eMais4: true	!conservaMais2: true	mesmaCor: false	mesmoNumero: false	mesmoTipo: false	cartaPreta: false	cartaMortoPreta: false
+NÃO
+Carta no Morto: (59) NORMAL - 1 - VERMELHO
+107 - WILD|	106 - +4|	105 - WILD|	104 - +4|	103 - WILD|	102 - +4|	101 - WILD|	100 - +4|	99 - INVERTE VERMELHO|	98 - INVERTE VERDE|	97 - INVERTE AZUL|	96 - INVERTE AMARELO|	95 - PULA VERMELHO|	94 - PULA VERDE|	93 - PULA AZUL|	92 - PULA AMARELO|	91 - +2 VERMELHO|	90 - +2 VERDE|	89 - +2 AZUL|	88 - +2 AMARELO|	87 - 8 VERMELHO|	86 - 8 VERDE|	85 - 8 AZUL|	84 - 8 AMARELO|	83 - 7 VERMELHO|	82 - 7 VERDE|	81 - 7 AZUL|	80 - 7 AMARELO|	79 - 6 VERMELHO|	78 - 6 VERDE|	77 - 6 AZUL|	76 - 6 AMARELO|	75 - 5 VERMELHO|	74 - 5 VERDE|	73 - 5 AZUL|	72 - 5 AMARELO|	71 - 4 VERMELHO|	70 - 4 VERDE|	69 - 4 AZUL|	68 - 4 AMARELO|	67 - 3 VERMELHO|	66 - 3 VERDE|	65 - 3 AZUL|	64 - 3 AMARELO|	63 - 2 VERMELHO|	62 - 2 VERDE|	61 - 2 AZUL|	60 - 2 AMARELO|	59 - 1 VERMELHO|	58 - 1 VERDE|	57 - 1 AZUL|	56 - 1 AMARELO|	55 - 0 VERMELHO|	54 - 0 VERDE|	53 - 0 AZUL|	52 - 0 AMARELO|	51 - INVERTE VERMELHO|	50 - INVERTE VERDE|	49 - INVERTE AZUL|	48 - INVERTE AMARELO|	47 - PULA VERMELHO|	46 - PULA VERDE|	45 - PULA AZUL|	44 - PULA AMARELO|	43 - +2 VERMELHO|	42 - +2 VERDE|	41 - +2 AZUL|	40 - +2 AMARELO|	39 - 8 VERMELHO|	38 - 8 VERDE|	37 - 8 AZUL|	36 - 8 AMARELO|	35 - 7 VERMELHO|	34 - 7 VERDE|	33 - 7 AZUL|	32 - 7 AMARELO|	31 - 6 VERMELHO|	30 - 6 VERDE|	29 - 6 AZUL|	28 - 6 AMARELO|	27 - 5 VERMELHO|	26 - 5 VERDE|	25 - 5 AZUL|	24 - 5 AMARELO|	23 - 4 VERMELHO|	22 - 4 VERDE|	21 - 4 AZUL|	20 - 4 AMARELO|	19 - 3 VERMELHO|	18 - 3 VERDE|	17 - 3 AZUL|	16 - 3 AMARELO|	15 - 2 VERMELHO|	14 - 2 VERDE|	13 - 2 AZUL|	12 - 2 AMARELO|	11 - 1 VERMELHO|	10 - 1 VERDE|	9 - 1 AZUL|	8 - 1 AMARELO|	7 - 0 VERMELHO|	6 - 0 VERDE|	5 - 0 AZUL|	4 - 0 AMARELO|	3 - 0 VERMELHO|	2 - 0 VERDE|	1 - 0 AZUL|	0 - 0 AMARELO|	Pode jogar? Entrou no pode jogar
+!eMais4: true	!conservaMais2: true	mesmaCor: true	mesmoNumero: true	mesmoTipo: true	cartaPreta: false	cartaMortoPreta: false
+SIM!
+107 - WILD|	106 - +4|	105 - WILD|	104 - +4|	103 - WILD|	102 - +4|	101 - WILD|	100 - +4|	99 - INVERTE VERMELHO|	98 - INVERTE VERDE|	97 - INVERTE AZUL|	96 - INVERTE AMARELO|	95 - PULA VERMELHO|	94 - PULA VERDE|	93 - PULA AZUL|	92 - PULA AMARELO|	91 - +2 VERMELHO|	90 - +2 VERDE|	89 - +2 AZUL|	88 - +2 AMARELO|	87 - 8 VERMELHO|	86 - 8 VERDE|	85 - 8 AZUL|	84 - 8 AMARELO|	83 - 7 VERMELHO|	82 - 7 VERDE|	81 - 7 AZUL|	80 - 7 AMARELO|	79 - 6 VERMELHO|	78 - 6 VERDE|	77 - 6 AZUL|	76 - 6 AMARELO|	75 - 5 VERMELHO|	74 - 5 VERDE|	73 - 5 AZUL|	72 - 5 AMARELO|	71 - 4 VERMELHO|	70 - 4 VERDE|	69 - 4 AZUL|	68 - 4 AMARELO|	67 - 3 VERMELHO|	66 - 3 VERDE|	65 - 3 AZUL|	64 - 3 AMARELO|	63 - 2 VERMELHO|	62 - 2 VERDE|	61 - 2 AZUL|	60 - 2 AMARELO|	59 - 1 VERMELHO|	58 - 1 VERDE|	57 - 1 AZUL|	56 - 1 AMARELO|	55 - 0 VERMELHO|	54 - 0 VERDE|	53 - 0 AZUL|	52 - 0 AMARELO|	51 - INVERTE VERMELHO|	50 - INVERTE VERDE|	49 - INVERTE AZUL|	48 - INVERTE AMARELO|	47 - PULA VERMELHO|	46 - PULA VERDE|	45 - PULA AZUL|	44 - PULA AMARELO|	43 - +2 VERMELHO|	42 - +2 VERDE|	41 - +2 AZUL|	40 - +2 AMARELO|	39 - 8 VERMELHO|	38 - 8 VERDE|	37 - 8 AZUL|	36 - 8 AMARELO|	35 - 7 VERMELHO|	34 - 7 VERDE|	33 - 7 AZUL|	32 - 7 AMARELO|	31 - 6 VERMELHO|	30 - 6 VERDE|	29 - 6 AZUL|	28 - 6 AMARELO|	27 - 5 VERMELHO|	26 - 5 VERDE|	25 - 5 AZUL|	24 - 5 AMARELO|	23 - 4 VERMELHO|	22 - 4 VERDE|	21 - 4 AZUL|	20 - 4 AMARELO|	19 - 3 VERMELHO|	18 - 3 VERDE|	17 - 3 AZUL|	16 - 3 AMARELO|	15 - 2 VERMELHO|	14 - 2 VERDE|	13 - 2 AZUL|	12 - 2 AMARELO|	11 - 1 VERMELHO|	10 - 1 VERDE|	9 - 1 AZUL|	8 - 1 AMARELO|	7 - 0 VERMELHO|	6 - 0 VERDE|	5 - 0 AZUL|	4 - 0 AMARELO|	3 - 0 VERMELHO|	2 - 0 VERDE|	1 - 0 AZUL|	0 - 0 AMARELO|	Pode jogar? Entrou no pode jogar
+!eMais4: true	!conservaMais2: true	mesmaCor: true	mesmoNumero: true	mesmoTipo: false	cartaPreta: false	cartaMortoPreta: false
+SIM!
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
