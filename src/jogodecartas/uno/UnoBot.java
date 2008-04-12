@@ -28,7 +28,7 @@ public class UnoBot extends Bot {
     protected void processaComando(String channel, String sender, String comando) {
         //super.processaComando(channel, sender, comando);
 
-        String[] c = comando.split("\\s");
+        String[] c = comando.split("\s");
 
         if (c[0].equalsIgnoreCase("uno")) {
             if (!jogos.containsKey(channel)) {
@@ -53,14 +53,13 @@ public class UnoBot extends Bot {
             }
 
             if (uno.getEstado() != Estado.FIM) {
-                if (uno.getProximoJogador().getNome().equalsIgnoreCase(sender)) {
+                if (c[0].equalsIgnoreCase("info"))
+                  info(channel);
+                else if (uno.getProximoJogador().getNome().equalsIgnoreCase(sender)) {
                     System.out.println("Esta na vez");
                     if (c[0].equalsIgnoreCase("puxa")) {
                         uno.puxa();
-                        info(channel);
                     }
-                    else if (c[0].equalsIgnoreCase("info"))
-                        info(channel);
                     else if (c[0].equalsIgnoreCase("passa")) {
                         uno.passa();
                         info(channel);

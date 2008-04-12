@@ -54,7 +54,7 @@ public class BaralhoUno extends Baralho {
 
 
         for (int i = 0; i < 2; i++) {
-            for (int j = 0; j < 9; j++) {
+            for (int j = 1; j <= 9; j++) {
                 c = pop();
                 c.setCaracteristica("NUMERO", j);
                 c.setCaracteristica("COR", Cor.AMARELO);

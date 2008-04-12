@@ -7,12 +7,13 @@ public class UnoBotTeste {
     public static void main(String[] args) {
         System.out.println("Inicializando");
         
-        UnoBot uno = new UnoBot("unobot2", "irc.dal.net");
+        UnoBot uno = new UnoBot("unobot2", "irc.brasirc.org");
 
         try {
             uno.joinChannel("#unobot");
-        } catch (Exception e) {}
 
-        while (true) ;
+            while (true)
+              Thread.sleep(1000);
+        } catch (Exception e) {}
     }
 }
