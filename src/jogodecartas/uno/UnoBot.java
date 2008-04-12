@@ -28,7 +28,7 @@ public class UnoBot extends Bot {
     protected void processaComando(String channel, String sender, String comando) {
         //super.processaComando(channel, sender, comando);
 
-        String[] c = comando.split("\s");
+        String[] c = comando.split("\\s");
 
         if (c[0].equalsIgnoreCase("uno")) {
             if (!jogos.containsKey(channel)) {
