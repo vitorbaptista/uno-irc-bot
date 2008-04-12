@@ -54,24 +54,23 @@ public class Bot extends PircBot {
         // Se houver um jogo no canal onde recebeu a mensagem...
         if (jogos.containsKey(channel)) {
             JogoDeCartas jogo = (JogoDeCartas) jogos.get(channel);
-            Jogador[] jogadores = uno.getJogadores();
+            Jogador[] jogadores = jogo.getJogadores();
 
             Jogador j = null;
             for (int i = 0; i < jogadores.length; i++)
                 if (jogadores[i].getNome().equalsIgnoreCase(sender))
                     j = jogadores[i];
 
-            boolean estaNaVez = (j == uno.getProximoJogador());
+            boolean estaNaVez = (j == jogo.getProximoJogador());
 
             // Caso ele queira ver os jogadores...
             if (c[0].equalsIgnoreCase("jogadores")) {
-                    Jogador[] jogadores = jogo.getJogadores();
-                    String j = "";
+                    String aux = "";
 
                     for (int i = 0; i < jogadores.length; i++)
-                        j += " " + jogadores[i].getNome();
+                        aux += " " + jogadores[i].getNome();
 
-                    sendMessage(channel, "Jogadores: " + j);
+                    sendMessage(channel, "Jogadores: " + aux);
             }
             // ou caso ele queira jogar uma carta
             else if (estaNaVez && c[0].equalsIgnoreCase("joga")) {
@@ -90,12 +89,12 @@ public class Bot extends PircBot {
         }
     }
 
-    protected void info(String channel) {
+    private void info(String channel) {
         if (jogos.containsKey(channel)) {
             JogoDeCartas jogo = (JogoDeCartas) jogos.get(channel);
 
             // Formata a lista de jogadores p/ escrever
-            Jogador js[] = uno.getJogadores();
+            Jogador js[] = jogo.getJogadores();
             String jogadoresString = "Jogadores: ";
             if (js.length > 0)
                 jogadoresString = Colors.BOLD + js[0].getNome() + Colors.NORMAL + " ";

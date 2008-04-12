@@ -7,10 +7,10 @@ import java.util.Iterator;
 import java.util.Scanner;
 
 public class UnoGeralTest {
-    private Uno uno = new Uno();
+    private Uno uno;
     
     private void exibe() {
-        Jogador js[] = uno.getFila();
+        Jogador js[] = uno.getJogadores();
         for (int i = 0; i < 3; i++)
             System.out.print(js[i].getNome() + " - ");
 
@@ -18,10 +18,10 @@ public class UnoGeralTest {
 
         System.out.println();
 
-        Iterator i = uno.getJogadores().iterator();
+        Jogador[] aux = uno.getJogadores();
 
-        while (i.hasNext()) {
-            Jogador j = (Jogador) i.next();
+        for (int i = 0; i < aux.length; i++) {
+            Jogador j = aux[i];
             System.out.print(j.getNome() + ": ");
             
             Iterator s = j.getBaralho().iterator();
@@ -82,6 +82,7 @@ public class UnoGeralTest {
     }
 
     UnoGeralTest() {
+        uno = new Uno();
         uno.adicionaJogador(new Jogador("j"));
         uno.adicionaJogador(new Jogador("k"));
         uno.adicionaJogador(new Jogador("l"));
