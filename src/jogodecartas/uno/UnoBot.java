@@ -59,6 +59,8 @@ public class UnoBot extends Bot {
                     System.out.println("Esta na vez");
                     if (c[0].equalsIgnoreCase("puxa")) {
                         uno.puxa();
+                        uno.passa(); // Tem que mudar aqui, ele pode puxar e jogar...
+                        info(channel);
                     }
                     else if (c[0].equalsIgnoreCase("passa")) {
                         uno.passa();
@@ -70,6 +72,10 @@ public class UnoBot extends Bot {
                         else if (c.length == 3) 
                             uno.joga(c[1] + " " + c[2]);
 
+                        if (!c[1].equalsIgnoreCase("+4") && !c[1].equalsIgnoreCase("wild")) {
+                          uno.passa();
+                          info(channel);
+                        }
                         checaFimJogo(channel);
                     }
 
@@ -78,6 +84,8 @@ public class UnoBot extends Bot {
                         else if (c[1].equalsIgnoreCase("AZUL")) uno.setCorMorto(Cor.AZUL);
                         else if (c[1].equalsIgnoreCase("VERDE")) uno.setCorMorto(Cor.VERDE);
                         else if (c[1].equalsIgnoreCase("VERMELHO")) uno.setCorMorto(Cor.VERMELHO);
+                        uno.passa();
+                        info(channel);
                     }
                 }
             }
@@ -119,14 +127,7 @@ public class UnoBot extends Bot {
         String resultado = "[";
 
         Cor cor = (Cor) c.getCaracteristica("COR");
-        if (cor == Cor.AMARELO)
-            resultado = resultado + Colors.YELLOW;
-        else if (cor == Cor.AZUL)
-                resultado = resultado + Colors.BLUE;
-        else if (cor == Cor.VERDE)
-                resultado = resultado + Colors.GREEN;
-        else if (cor == Cor.VERMELHO)
-                resultado = resultado + Colors.RED;
+        resultado = resultado + formataCor(cor);
 
         resultado = resultado + ((c.getCaracteristica("TIPO") == "NORMAL") ? (Integer) c.getCaracteristica("NUMERO") : (String) c.getCaracteristica("TIPO"));
 
@@ -134,6 +135,19 @@ public class UnoBot extends Bot {
 
         return resultado;
 
+    }
+
+    private String formataCor(Cor cor) {
+        if (cor == Cor.AMARELO)
+            return Colors.YELLOW;
+        else if (cor == Cor.AZUL)
+            return Colors.BLUE;
+        else if (cor == Cor.VERDE)
+            return Colors.GREEN;
+        else if (cor == Cor.VERMELHO)
+            return Colors.RED;
+        else
+            return Colors.NORMAL;
     }
 
     private void info(String channel) {
@@ -168,7 +182,7 @@ public class UnoBot extends Bot {
             sendMessage(jogadores[0].getNome(), aux);
         }
         Carta morto = uno.getCartaMorto();
-        sendMessage(channel, "Morto: " + ((((Cor) morto.getCaracteristica("COR")) == Cor.PRETO) ? uno.getCorMorto() : formataCarta(morto)));
+        sendMessage(channel, "Morto: " + ((((Cor) morto.getCaracteristica("COR")) == Cor.PRETO) ? formataCor(uno.getCorMorto()) + uno.getCorMorto() + Colors.NORMAL : formataCarta(morto)));
     }
 
 }
