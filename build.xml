@@ -1,5 +1,6 @@
 <project name="uno" default="compile">
 
+<!--import file="nbproject/build-impl.xml"/-->
     <property name="sourcedir" value="${basedir}/src"/>
     <property name="targetdir" value="${basedir}/bin"/>
     <property name="librarydir" value="${basedir}/lib"/>
@@ -114,6 +115,7 @@
     <target name="all" depends="compile, test, jar, doc, format"/>
     
     <target name="run" depends="compile">
+        <!--java fork="true" classname="src.chat.Main" classpathref="libraries"-->
         <java fork="true" classname="test.UnoBotTeste" classpathref="libraries">
             <classpath path="${targetdir}"/>
             <arg value="${action}"/>

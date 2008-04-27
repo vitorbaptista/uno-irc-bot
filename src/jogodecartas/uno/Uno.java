@@ -42,6 +42,7 @@ public class Uno implements JogoDeCartas {
     private Cor corMorto;
     private int numJogadas;
     private final int NUMCARTASINICIO = 7;
+    private int numJogadoresPassar;
 
     /**
      * Constructor padrão. Inicializa o baralho, jogadores, fila e estado.
@@ -65,6 +66,7 @@ public class Uno implements JogoDeCartas {
             estado = Estado.INICIADO;
             vencedor = null;
             numCartasPuxar = 1;
+	    numJogadoresPassar = 1;
             corMorto = null;
             baralho.embaralha();
 
@@ -177,6 +179,9 @@ public class Uno implements JogoDeCartas {
                     if (tipo.equalsIgnoreCase("INVERTE"))
                         fila = inverte(fila);
 
+		    else if (tipo.equalsIgnoreCase("PULA"))
+			numJogadoresPassar = 2;
+
             if (c.getCaracteristica("COR") == Cor.PRETO)
                 estado = Estado.MUDA_COR;
             else
@@ -286,7 +291,8 @@ public class Uno implements JogoDeCartas {
     public boolean passa() {
         if (estado == Estado.PASSA) {
             // A carta no morto é Pula? Se sim, passa 2, se não, 1.
-            int numJogadoresPassar = (((String) getCartaMorto().getCaracteristica("TIPO")).equalsIgnoreCase("PULA")) ? 2 : 1;
+//            numJogadoresPassar = (((String) getCartaMorto().getCaracteristica("TIPO")).equalsIgnoreCase("PULA")) ? 2 : 1;
+
 
             // Passa numJogadoresPassar
             for (; numJogadoresPassar > 0; numJogadoresPassar--)
@@ -294,6 +300,8 @@ public class Uno implements JogoDeCartas {
 
             // Seta o estado para aguardar a próxima jogada
             estado = Estado.JOGA;
+
+	    numJogadoresPassar = 1;
 
             return true;
         }
