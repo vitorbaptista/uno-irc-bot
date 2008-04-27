@@ -101,6 +101,7 @@ public class Uno implements JogoDeCartas {
                   setCorMorto(Cor.VERDE);
                   break;
                 default:
+                  setCorMorto(Cor.AZUL);
                   break;
                 }
             }
