@@ -21,6 +21,7 @@ import java.util.LinkedList;
 import java.util.ListIterator;
 import java.util.Vector;
 import java.util.Set;
+import java.util.Random;
 
 /**
  * Classe do Uno. Implementa a interface JogoDeCartas.
@@ -81,6 +82,29 @@ public class Uno implements JogoDeCartas {
             baralho.push(baralho.pop());
             joga(getCartaMorto());
 
+            // Caso ele tenha jogado um +4 ou WILD e precise mudar a cor
+            if (estado == Estado.MUDA_COR) {
+                Random rand = new Random();
+                int cor = rand.nextInt(4);
+
+                switch (cor) {
+                case 0:
+                  setCorMorto(Cor.AMARELO);
+                  break;
+                case 1:
+                  setCorMorto(Cor.AZUL);
+                  break;
+                case 2:
+                  setCorMorto(Cor.VERMELHO);
+                  break;
+                case 3:
+                  setCorMorto(Cor.VERDE);
+                  break;
+                default:
+                  break;
+                }
+            }
+            
             // Muda o estado para o primeiro jogador poder jogar
             if (estado == Estado.PASSA)
                 estado = Estado.JOGA;
