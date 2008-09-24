@@ -160,7 +160,7 @@ public class UnoBot extends Bot {
         Jogador js[] = uno.getJogadores();
         String jogadoresString = "";
         if (js.length > 0)
-            jogadoresString = Colors.BOLD + js[0].getNome() + "[" + Colors.RED + js[0].getBaralho().size() +  Colors.NORMAL + "] ";
+            jogadoresString = /*Colors.BOLD + */js[0].getNome() + "[" + Colors.RED + js[0].getBaralho().size() +  Colors.NORMAL + "] ";
         for (int i = 1; i < js.length; i++)
             jogadoresString = jogadoresString + " " + js[i].getNome() + "[" + Colors.RED + js[i].getBaralho().size() +  Colors.NORMAL + "]"; 
         
@@ -182,7 +182,7 @@ public class UnoBot extends Bot {
             sendMessage(jogadores[0].getNome(), aux);
         }
         Carta morto = uno.getCartaMorto();
-        sendMessage(channel, "Morto: " + ((((Cor) morto.getCaracteristica("COR")) == Cor.PRETO) ? formataCor(uno.getCorMorto()) + uno.getCorMorto() + Colors.NORMAL : formataCarta(morto)));
+        sendMessage(channel, "Morto: " + ((((Cor) morto.getCaracteristica("COR")) == Cor.PRETO) ? "[" + formataCor(uno.getCorMorto()) + uno.getCorMorto() + Colors.NORMAL + "]" : formataCarta(morto)));
     }
 
 }
